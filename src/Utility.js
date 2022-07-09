@@ -63,6 +63,12 @@ const UpdateStateWithAgents = (newTilesStates, newAgents) => {
   return newTilesAgentsStates;
 };
 
+const HandleUIChangeUpdateState = (event, target) => {
+  let changeObj = {};
+  changeObj[event.target.id] = event.target.value;
+  target().setState(changeObj);
+};
+
 export {
   PondHasTile,
   GetTile,
@@ -73,5 +79,6 @@ export {
   GetPlayerAgentId,
   GetTargetAgent,
   GetAgentIndexWithId,
-  UpdateStateWithAgents
+  UpdateStateWithAgents,
+  HandleUIChangeUpdateState
 };
