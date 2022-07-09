@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import Map from './components/Map';
+import MapUI from './components/MapUI';
+import { HandleUIChangeUpdateState } from './Utility';
 import './App.css';
 import './Game.css';
 import ReactDom from 'react-dom';
@@ -32,24 +34,12 @@ class App extends Component {
 
     const app = (
       // How many rows there are determines heigt, columns determines width
-      <Map rows={this.state.height} columns={this.state.width} test={true} />
+      <MapUI height={this.state.height} width={this.state.width} test={true} />
     );
 
     ReactDom.render(app, document.getElementById('App'));
 
     this.setState({ setSize: false });
-  };
-
-  handleChange = (event) => {
-    if (event.target.id === 'width') {
-      this.setState({
-        width: event.target.value
-      });
-    } else {
-      this.setState({
-        height: event.target.value
-      });
-    }
   };
 
   render() {
@@ -71,7 +61,11 @@ class App extends Component {
             type="int"
             id="height"
             value={this.state.height}
-            onChange={this.handleChange}
+            onChange={(e) =>
+              HandleUIChangeUpdateState(e, () => {
+                return this;
+              })
+            }
           />
 
           <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -81,7 +75,11 @@ class App extends Component {
             type="int"
             id="width"
             value={this.state.width}
-            onChange={this.handleChange}
+            onChange={(e) =>
+              HandleUIChangeUpdateState(e, () => {
+                return this;
+              })
+            }
           />
 
           <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
