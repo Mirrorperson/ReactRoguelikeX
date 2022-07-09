@@ -1,5 +1,6 @@
 .App {
   margin: 5em;
+  width: fit-content;
 }
 
 .App-interface {
@@ -52,4 +53,12 @@
 
 .hidden {
   display: none;
+}
+
+.MapAndSideControls {
+  display: flex;
+}
+
+.SideControls {
+  margin: 10px;
 }

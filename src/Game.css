@@ -65,11 +65,11 @@
 .tile-clone {
   opacity: 0.5;
 }
-.App div {
+.App .tileRow {
   display: flex;
   flex-direction: row;
 }
-.App div div {
+.App .tileColumn {
   display: flex;
   flex-direction: column;
 }
