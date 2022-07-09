@@ -113,7 +113,7 @@ const HandleAgentEvents = (state) => {
   let activeAgent = GetActiveAgent(state.agents);
 
   if (activeAgent.state.type === 'player') {
-    return null;
+    return;
   }
 
   let newState;
