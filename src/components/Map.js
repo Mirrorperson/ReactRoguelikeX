@@ -100,13 +100,17 @@ class Map extends Component {
 
     let stateActiveAgentIdAndDirection = HandleAgentEvents(this.state);
 
-    if (stateActiveAgentIdAndDirection === null) {
+    if (!stateActiveAgentIdAndDirection) {
       // players turn next
       this.setState((state) => ({ playersTurn: true }));
       return;
     } else {
       [newState, activeAgentId, moveDirection] = stateActiveAgentIdAndDirection;
     }
+
+    let scaledMove = Math.cos(this.props.moveSpeed * 200);
+    scaledMove = scaledMove < 0 ? scaledMove * -1 : scaledMove;
+    let animateTime = scaledMove * 1000;
 
     // animation start
     var animateAgent = $(`#${activeAgentId}`);
@@ -143,7 +147,7 @@ class Map extends Component {
         break;
     }
 
-    $(`#${activeAgentId}Clone`).animate(movedCss, 1000, () => {
+    $(`#${activeAgentId}Clone`).animate(movedCss, animateTime, () => {
       // remove clones update state
       $(`div[id$=Clone]`).remove();
       thisAppMap.setState((state) => ({
@@ -156,9 +160,9 @@ class Map extends Component {
   render() {
     ConsoleLogTest(this.state.test, this.state.tilesAgentsStates);
     return (
-      <div tabIndex="0" onKeyDown={this.handleKeyPress}>
+      <div tabIndex="0" onKeyDown={this.handleKeyPress} className="tileRow">
         {this.state.tilesAgentsStates.map((rows, index) => (
-          <div key={index}>
+          <div key={index} className="tileColumn">
             {this.state.tilesAgentsStates[index].map(
               (tileTypeOrAgentId, colIndex) => (
                 <Tile
